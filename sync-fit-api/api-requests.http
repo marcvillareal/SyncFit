@@ -1,0 +1,81 @@
+### Health Check
+GET http://localhost:8080/health
+
+### Get All Workouts
+GET http://localhost:8080/workouts
+
+### Get Workouts by Week (2024 Week 15)
+GET http://localhost:8080/workouts?week=2024-W15
+
+### Get Workouts by Exercise
+GET http://localhost:8080/workouts?exercise=bench press
+
+### Get Recent Workouts (last 7 days)
+GET http://localhost:8080/workouts?days=7
+
+### Create Workout - Bench Press
+POST http://localhost:8080/workouts
+Content-Type: application/json
+
+{
+  "date": "2024-03-15",
+  "exercise": "Bench Press",
+  "sets": 3,
+  "reps": 10,
+  "weight": 80.5,
+  "rpe": 8.0
+}
+
+### Create Workout - Squat
+POST http://localhost:8080/workouts
+Content-Type: application/json
+
+{
+  "date": "2024-03-15",
+  "exercise": "Squat",
+  "sets": 4,
+  "reps": 8,
+  "weight": 100.0,
+  "rpe": 9.0
+}
+
+### Create Workout - Deadlift
+POST http://localhost:8080/workouts
+Content-Type: application/json
+
+{
+  "date": "2024-03-16",
+  "exercise": "Deadlift",
+  "sets": 3,
+  "reps": 5,
+  "weight": 120.0,
+  "rpe": 9.5
+}
+
+### Get Weekly Stats (last 4 weeks)
+GET http://localhost:8080/stats?range=last4w
+
+### Get Weekly Stats (last 8 weeks)
+GET http://localhost:8080/stats?range=last8w
+
+### Get Workout by ID
+GET http://localhost:8080/workouts/1
+
+### Delete Workout by ID
+DELETE http://localhost:8080/workouts/1
+
+### Invalid Request - Missing required fields (will return validation errors)
+POST http://localhost:8080/workouts
+Content-Type: application/json
+
+{
+  "date": "2024-03-15",
+  "exercise": "",
+  "sets": 0,
+  "reps": -5,
+  "weight": -10.0,
+  "rpe": 15.0
+}
+
+### Invalid Request - Invalid week format
+GET http://localhost:8080/workouts?week=invalid-week
