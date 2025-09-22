@@ -1,6 +1,6 @@
 # SyncFit Backend API
 
-A Spring Boot REST API for tracking workouts, monitoring progress, and sharing fitness data with friends.
+A simple Spring Boot REST API for tracking workouts, monitoring progress, and sharing fitness data with friends.
 
 **Pitch:** Log workouts, see weekly progress, compare with gym buddies.
 
@@ -15,7 +15,7 @@ A Spring Boot REST API for tracking workouts, monitoring progress, and sharing f
 1. **Clone and navigate to the project:**
    ```bash
    git clone <repository-url>
-   cd SyncFit
+   cd SyncFit/sync-fit-api
    ```
 
 2. **Build and run:**
