@@ -36,3 +36,11 @@ export interface HealthResponse {
   timestamp: string;
   version: string;
 }
+
+export interface StreakData {
+  currentStreak: number;
+  longestStreak: number;
+  lastWorkoutDate: string | null;
+  streakStartDate: string | null;
+  totalActiveDays: number;
+}
