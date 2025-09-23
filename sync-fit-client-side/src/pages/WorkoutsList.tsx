@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { workoutService } from '../services/workoutService';
 import type { Workout } from '../types';
 import { format, parseISO } from 'date-fns';
+import Streaks from '../components/Streaks';
 
 const WorkoutsList: React.FC = React.memo(() => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -66,6 +67,8 @@ const WorkoutsList: React.FC = React.memo(() => {
           Add New Workout
         </Link>
       </div>
+
+      <Streaks workouts={workouts} />
 
       <div className="filters">
         <input
