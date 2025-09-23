@@ -443,3 +443,40 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Streaks Card Styles */
+.streaks-card {
+  background: linear-gradient(140deg, #0e265bff 0%, #2563EB 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.streaks-header {
+  margin: 0 0 20px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.streak-number {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.streak-message {
+  font-size: 1rem;
+  margin: 10px 0;
+  font-style: italic;
+}
+
+.streak-stats {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 15px;
+}
