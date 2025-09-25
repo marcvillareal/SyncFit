@@ -83,4 +83,13 @@ public class WorkoutController {
         
         return ResponseEntity.ok(response);
     }
+
+    /**
+     * PUT /workouts/{id} - Update workout by ID
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Workout> updateWorkout(@PathVariable Long id, @Valid @RequestBody WorkoutCreateRequest request) {
+        Workout updatedWorkout = workoutService.updateWorkout(id, request);
+        return ResponseEntity.ok(updatedWorkout);
+    }
 }

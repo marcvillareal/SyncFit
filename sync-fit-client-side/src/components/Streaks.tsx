@@ -10,43 +10,52 @@ const calculateCurrentStreak = (workouts: Workout[]): number => {
     return 0;
   }
 
+  // Get unique workout dates and sort them in descending order (most recent first)
   const workoutDates = workouts
-    .map((workout) => workout.date.split("T")[0])
+    .map((workout) => {
+      // Handle both date-only and datetime formats
+      const dateStr = workout.date.includes('T') ? workout.date.split("T")[0] : workout.date;
+      return dateStr;
+    })
     .filter((date, index, array) => array.indexOf(date) === index)
-    .sort();
+    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime());
 
-  const now = new Date();
-  const today =
-    now.getFullYear() +
-    "-" +
-    String(now.getMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(now.getDate()).padStart(2, "0");
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0];
 
-  const lastWorkoutDate = workoutDates[workoutDates.length - 1];
-
-  const lastDate = new Date(lastWorkoutDate + "T00:00:00");
-  const todayDate = new Date(today + "T00:00:00");
-
-  const daysDiff = Math.floor(
-    (lastDate.getTime() - todayDate.getTime()) / (1000 * 60 * 60 * 24)
+  const mostRecentWorkout = workoutDates[0];
+  
+  // Calculate days between most recent workout and today
+  const mostRecentDate = new Date(mostRecentWorkout);
+  const todayDate = new Date(todayStr);
+  const daysSinceLastWorkout = Math.floor(
+    (todayDate.getTime() - mostRecentDate.getTime()) / (1000 * 60 * 60 * 24)
   );
 
-  if (daysDiff < -1 || daysDiff > 7) {
+  // If last workout was more than 1 day ago, streak is broken
+  // Allow for today (0) or yesterday (1) to maintain streak
+  if (daysSinceLastWorkout > 1) {
     return 0;
   }
 
   let streak = 1;
 
-  for (let i = workoutDates.length - 2; i >= 0; i--) {
-    const current = new Date(workoutDates[i] + "T00:00:00");
-    const next = new Date(workoutDates[i + 1] + "T00:00:00");
-
-    const diffDays = Math.floor(
-      (next.getTime() - current.getTime()) / (1000 * 60 * 60 * 24)
+  // Count consecutive days working backwards from most recent
+  for (let i = 1; i < workoutDates.length; i++) {
+    const currentDate = new Date(workoutDates[i]);
+    const previousDate = new Date(workoutDates[i - 1]);
+    
+    const daysDiff = Math.floor(
+      (previousDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
     );
 
-    if (diffDays === 1) {
+    // If exactly 1 day apart, continue streak
+    // Allow for up to 2 days gap (rest days) but could be made stricter
+    if (daysDiff === 1) {
+      streak++;
+    } else if (daysDiff === 2) {
+      // Optional: Allow one rest day between workouts
       streak++;
     } else {
       break;

@@ -10,10 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -197,5 +195,23 @@ public class WorkoutService {
         } catch (NumberFormatException e) {
             return 4; // Default fallback
         }
+    }
+
+    /**
+     * Update an existing workout
+     */
+    public Workout updateWorkout(Long id, WorkoutCreateRequest request) {
+        Workout existingWorkout = workoutRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Workout not found with id: " + id));
+
+        // Update the workout fields
+        existingWorkout.setExercise(request.getExercise());
+        existingWorkout.setSets(request.getSets());
+        existingWorkout.setReps(request.getReps());
+        existingWorkout.setWeight(request.getWeight());
+        existingWorkout.setRpe(request.getRpe());
+        existingWorkout.setDate(request.getDate());
+
+        return workoutRepository.save(existingWorkout);
     }
 }

@@ -1,11 +1,11 @@
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/controller/WorkoutController.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/repository/WorkoutRepository.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/controller/StatsController.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/entity/Workout.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/controller/HealthController.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/exception/GlobalExceptionHandler.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/exception/ResourceNotFoundException.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/SyncFitApplication.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/service/WorkoutService.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/dto/WorkoutCreateRequest.java
-/Users/marcvillareal/Documents/Dev/SyncFit/sync-fit-api/src/main/java/com/syncfit/dto/WeeklyStats.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/controller/HealthController.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/exception/GlobalExceptionHandler.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/SyncFitApplication.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/repository/WorkoutRepository.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/controller/StatsController.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/dto/WeeklyStats.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/entity/Workout.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/service/WorkoutService.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/dto/WorkoutCreateRequest.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/controller/WorkoutController.java
+/Users/marcvillareal/Library/Mobile Documents/com~apple~CloudDocs/Documents/Dev/SyncFit-1/sync-fit-api/src/main/java/com/syncfit/exception/ResourceNotFoundException.java

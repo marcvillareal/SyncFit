@@ -46,6 +46,12 @@ export const workoutService = {
     await api.delete(`/workouts/${id}`);
   },
 
+  // Update workout
+  async updateWorkout(id: number, workout: WorkoutCreateRequest): Promise<Workout> {
+    const response = await api.put(`/workouts/${id}`, workout);
+    return response.data;
+  },
+
   // Get weekly statistics
   async getWeeklyStats(range: string = 'last4w'): Promise<WeeklyStats[]> {
     const response = await api.get('/stats', { params: { range } });
