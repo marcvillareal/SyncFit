@@ -8,10 +8,6 @@ const Progress: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [range, setRange] = useState("last4w");
 
-  useEffect(() => {
-    loadStats();
-  }, [range, loadStats]);
-
   const loadStats = useCallback(async () => {
     try {
       setLoading(true);
@@ -24,6 +20,10 @@ const Progress: React.FC = () => {
       setLoading(false);
     }
   }, [range]);
+
+  useEffect(() => {
+    loadStats();
+  }, [range, loadStats]);
 
   if (loading) {
     return <div className="loading">Loading progress data...</div>;
