@@ -9,10 +9,45 @@ const WorkoutsList: React.FC = React.memo(() => {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  // Separate input states from actual filter state
+  const [exerciseInput, setExerciseInput] = useState('');
+  const [weekInput, setWeekInput] = useState('');
   const [filter, setFilter] = useState<{
     week?: string;
     exercise?: string;
   }>({});
+
+  // Exercise to image/emoji mapping
+  const getExerciseImage = (exercise: string): string => {
+    const exerciseLower = exercise.toLowerCase();
+    
+    if (exerciseLower.includes('bench press') || exerciseLower.includes('incline') && exerciseLower.includes('press')) {
+      return '🏋️‍♂️'; // Weight lifter
+    } else if (exerciseLower.includes('squat')) {
+      return '🦵'; // Leg
+    } else if (exerciseLower.includes('deadlift')) {
+      return '💪'; // Flexed bicep
+    } else if (exerciseLower.includes('overhead press') || exerciseLower.includes('shoulder press')) {
+      return '🤸‍♂️'; // Person doing cartwheel (overhead movement)
+    } else if (exerciseLower.includes('pull-up') || exerciseLower.includes('chin-up') || exerciseLower.includes('lat pulldown')) {
+      return '🧗‍♂️'; // Person climbing
+    } else if (exerciseLower.includes('row') || exerciseLower.includes('barbell row') || exerciseLower.includes('t-bar row')) {
+      return '🚣‍♂️'; // Person rowing
+    } else if (exerciseLower.includes('dip')) {
+      return '🤸‍♀️'; // Person doing cartwheel
+    } else if (exerciseLower.includes('lateral raise') || exerciseLower.includes('shoulder')) {
+      return '🤲'; // Open hands (shoulder movement)
+    } else if (exerciseLower.includes('curl') || exerciseLower.includes('bicep')) {
+      return '💪'; // Flexed bicep
+    } else if (exerciseLower.includes('leg press') || exerciseLower.includes('bulgarian split')) {
+      return '🦵'; // Leg
+    } else if (exerciseLower.includes('cardio') || exerciseLower.includes('running') || exerciseLower.includes('treadmill')) {
+      return '🏃‍♂️'; // Person running
+    } else {
+      return '⚡'; // Default energy/fitness icon
+    }
+  };
 
   const loadWorkouts = useCallback(async () => {
     try {
@@ -31,6 +66,19 @@ const WorkoutsList: React.FC = React.memo(() => {
   useEffect(() => {
     loadWorkouts();
   }, [loadWorkouts]);
+
+  const handleFilterUpdate = () => {
+    setFilter({
+      exercise: exerciseInput || undefined,
+      week: weekInput || undefined
+    });
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleFilterUpdate();
+    }
+  };
 
   const handleDeleteWorkout = async (id: number) => {
     if (!window.confirm('Are you sure you want to delete this workout?')) {
@@ -73,26 +121,36 @@ const WorkoutsList: React.FC = React.memo(() => {
       <div className="filters">
         <input
           type="text"
-          placeholder="Filter by exercise..."
-          value={filter.exercise || ''}
-          onChange={(e) => setFilter({ ...filter, exercise: e.target.value || undefined })}
+          placeholder="Filter by exercise"
+          value={exerciseInput}
+          onChange={(e) => setExerciseInput(e.target.value)}
+          onKeyPress={handleKeyPress}
           className="filter-input"
         />
         <input
           type="text"
-          placeholder="Week (YYYY-WW)"
-          value={filter.week || ''}
-          onChange={(e) => setFilter({ ...filter, week: e.target.value || undefined })}
+          placeholder="Week (YYYY-WW) e.g. 2025-W34"
+          value={weekInput}
+          onChange={(e) => setWeekInput(e.target.value)}
+          onKeyPress={handleKeyPress}
           className="filter-input"
         />
         <button
-          onClick={() => setFilter({ week: getCurrentWeek })}
+          onClick={() => {
+            const currentWeek = getCurrentWeek;
+            setWeekInput(currentWeek);
+            setFilter({ ...filter, week: currentWeek });
+          }}
           className="btn btn-secondary"
         >
           This Week
         </button>
         <button
-          onClick={() => setFilter({})}
+          onClick={() => {
+            setExerciseInput('');
+            setWeekInput('');
+            setFilter({});
+          }}
           className="btn btn-secondary"
         >
           Clear Filters
@@ -117,7 +175,12 @@ const WorkoutsList: React.FC = React.memo(() => {
           {workouts.map((workout) => (
             <div key={workout.id} className="workout-card">
               <div className="workout-header">
-                <h3>{workout.exercise}</h3>
+                <div className="exercise-info">
+                  <div className="exercise-image">
+                    {getExerciseImage(workout.exercise)}
+                  </div>
+                  <h3>{workout.exercise}</h3>
+                </div>
                 <span className="workout-date">
                   {format(parseISO(workout.date), 'MMM dd, yyyy')}
                 </span>

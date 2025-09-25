@@ -16,6 +16,37 @@ const AddWorkout: React.FC = () => {
     rpe: 5
   });
 
+  // Common exercises list 
+  const exerciseOptions = [
+    'Bench Press',
+    'Squat',
+    'Deadlift',
+    'Overhead Press',
+    'Barbell Row',
+    'Pull-ups',
+    'Chin-ups',
+    'Incline Bench Press',
+    'Incline Dumbbell Press',
+    'Close Grip Bench Press',
+    'Pause Bench Press',
+    'Dumbbell Bench Press',
+    'Front Squat',
+    'Bulgarian Split Squats',
+    'Goblet Squats',
+    'Hack Squat',
+    'Leg Press',
+    'Romanian Deadlift',
+    'Sumo Deadlift',
+    'T-Bar Row',
+    'Cable Row',
+    'Pendlay Row',
+    'Lat Pulldown',
+    'Weighted Pull-ups',
+    'Dips',
+    'Lateral Raises',
+    'Dumbbell Flyes'
+  ].sort(); // Sort alphabetically
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -63,15 +94,20 @@ const AddWorkout: React.FC = () => {
 
         <div className="form-group">
           <label htmlFor="exercise">Exercise</label>
-          <input
+          <select
             id="exercise"
-            type="text"
             value={formData.exercise}
             onChange={(e) => handleInputChange('exercise', e.target.value)}
-            placeholder="e.g., Bench Press, Squat, Deadlift"
             required
             className="form-input"
-          />
+          >
+            <option value="">Select an exercise...</option>
+            {exerciseOptions.map((exercise) => (
+              <option key={exercise} value={exercise}>
+                {exercise}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="form-row">
