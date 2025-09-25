@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { workoutService } from "../services/workoutService";
 import type { WeeklyStats } from "../types";
 
@@ -10,21 +10,20 @@ const Progress: React.FC = () => {
 
   useEffect(() => {
     loadStats();
-  }, [range]);
+  }, [range, loadStats]);
 
-  const loadStats = async () => {
+  const loadStats = useCallback(async () => {
     try {
       setLoading(true);
       const data = await workoutService.getWeeklyStats(range);
       setStats(data);
       setError(null);
-    } catch (err) {
-      setError("Failed to load progress data");
-      console.error("Error loading stats:", err);
+    } catch {
+      setError("Failed to load stats");
     } finally {
       setLoading(false);
     }
-  };
+  }, [range]);
 
   if (loading) {
     return <div className="loading">Loading progress data...</div>;
@@ -120,7 +119,7 @@ const Progress: React.FC = () => {
           <div className="chart-placeholder">
             <h2>Volume Chart</h2>
             <div className="simple-chart">
-              {stats.map((week, index) => (
+              {stats.map((week) => (
                 <div key={week.week} className="chart-bar">
                   <div
                     className="bar"
